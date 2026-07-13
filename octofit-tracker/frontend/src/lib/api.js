@@ -55,8 +55,12 @@ function normalizeCollection(payload) {
 }
 
 export async function fetchCollection(endpoint, signal) {
-  const normalizedEndpoint = String(endpoint).replace(/^\/+|\/+$/g, '')
-  const response = await fetch(`${apiBaseUrl}/${normalizedEndpoint}/`, {
+  const endpointValue = String(endpoint).trim()
+  const requestUrl = /^https?:\/\//i.test(endpointValue)
+    ? endpointValue
+    : `${apiBaseUrl}/${endpointValue.replace(/^\/+|\/+$/g, '')}/`
+
+  const response = await fetch(requestUrl, {
     signal,
     headers: {
       Accept: 'application/json'
@@ -64,7 +68,7 @@ export async function fetchCollection(endpoint, signal) {
   })
 
   if (!response.ok) {
-    throw new Error(`Failed to load ${normalizedEndpoint}: ${response.status} ${response.statusText}`)
+    throw new Error(`Failed to load ${endpointValue}: ${response.status} ${response.statusText}`)
   }
 
   return normalizeCollection(await response.json())

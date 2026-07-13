@@ -1,12 +1,17 @@
 import CollectionPage from './CollectionPage.jsx'
 import { formatDateTime, formatNumber, getDisplayValue } from '../lib/api.js'
 
+const usersApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+  : 'http://localhost:8000/api/users/'
+
 export default function Users() {
   return (
     <CollectionPage
       title="Users"
       subtitle="Browse athletes, their fitness levels, and the teams they are linked to."
       endpoint="users"
+      endpointUrl={usersApiUrl}
       badgeLabel="users"
       emptyMessage="No users were found."
       renderItem={(user) => (

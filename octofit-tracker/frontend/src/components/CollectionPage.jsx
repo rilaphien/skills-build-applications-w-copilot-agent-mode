@@ -4,12 +4,13 @@ export default function CollectionPage({
   title,
   subtitle,
   endpoint,
+  endpointUrl,
   emptyMessage,
   badgeLabel,
   renderItem,
   gridClassName = 'row g-4'
 }) {
-  const { isLoading, error, items, totalCount } = useCollection(endpoint)
+  const { isLoading, error, items, totalCount } = useCollection(endpointUrl ?? endpoint)
 
   return (
     <section className="container-fluid px-3 px-lg-4 py-4 py-lg-5">

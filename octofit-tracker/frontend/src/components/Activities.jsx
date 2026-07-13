@@ -1,6 +1,10 @@
 import CollectionPage from './CollectionPage.jsx'
 import { formatDateTime, formatNumber, getDisplayValue } from '../lib/api.js'
 
+const activitiesApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : 'http://localhost:8000/api/activities/'
+
 function formatActivityType(value) {
   return String(value ?? 'activity')
     .replace(/_/g, ' ')
@@ -13,6 +17,7 @@ export default function Activities() {
       title="Activity Log"
       subtitle="Review recent training sessions, duration, calories, and who completed each workout."
       endpoint="activities"
+      endpointUrl={activitiesApiUrl}
       badgeLabel="activities"
       emptyMessage="No activities have been recorded yet."
       renderItem={(activity) => (

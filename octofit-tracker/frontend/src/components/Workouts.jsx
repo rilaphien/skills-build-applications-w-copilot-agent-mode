@@ -1,12 +1,17 @@
 import CollectionPage from './CollectionPage.jsx'
 import { formatDateTime, formatNumber, getDisplayValue } from '../lib/api.js'
 
+const workoutsApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : 'http://localhost:8000/api/workouts/'
+
 export default function Workouts() {
   return (
     <CollectionPage
       title="Workouts"
       subtitle="Recommended workout blueprints, exercises, and target difficulty levels."
       endpoint="workouts"
+      endpointUrl={workoutsApiUrl}
       badgeLabel="workouts"
       emptyMessage="No workouts have been recommended yet."
       renderItem={(workout) => (

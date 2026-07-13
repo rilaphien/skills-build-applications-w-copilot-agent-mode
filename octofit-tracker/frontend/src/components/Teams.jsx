@@ -1,12 +1,17 @@
 import CollectionPage from './CollectionPage.jsx'
 import { formatDateTime, formatNumber } from '../lib/api.js'
 
+const teamsApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : 'http://localhost:8000/api/teams/'
+
 export default function Teams() {
   return (
     <CollectionPage
       title="Teams"
       subtitle="Track team descriptions, members, and total points across the collection."
       endpoint="teams"
+      endpointUrl={teamsApiUrl}
       badgeLabel="teams"
       emptyMessage="No teams have been created yet."
       renderItem={(team) => (

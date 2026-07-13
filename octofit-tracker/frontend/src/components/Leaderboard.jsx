@@ -1,6 +1,10 @@
 import CollectionPage from './CollectionPage.jsx'
 import { formatDateTime, formatNumber, getDisplayValue } from '../lib/api.js'
 
+const leaderboardApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : 'http://localhost:8000/api/leaderboard/'
+
 function formatPeriod(value) {
   return String(value ?? 'period')
     .replace(/_/g, ' ')
@@ -13,6 +17,7 @@ export default function Leaderboard() {
       title="Leaderboard"
       subtitle="See the latest scoring period and the entries driving the competition."
       endpoint="leaderboard"
+      endpointUrl={leaderboardApiUrl}
       badgeLabel="boards"
       emptyMessage="The leaderboard is empty right now."
       renderItem={(board) => (
